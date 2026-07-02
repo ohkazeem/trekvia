@@ -1,0 +1,35 @@
+@use "./mixins.scss" as *;
+
+.btn {
+	display: inline-block;
+	min-width: 132px;
+	text-align: center;
+	padding-inline: 20px;
+	padding-block: 12px;
+	line-height: 1.1;
+	font-size: var(--font-size-xsmall);
+	font-weight: var(--font-weight-semibold);
+	border: 1px solid transparent;
+	box-shadow: none;
+	cursor: pointer;
+	transition: all 0.3s ease-in-out;
+
+	svg {
+		margin-block-end: -2.5px;
+		margin-inline-start: 5px;
+	}
+}
+
+.btn.primary {
+	background-color: var(--color-accent-2);
+	@include hover {
+		color: var(--color-accent-2);
+		background-color: var(--color-surface-dark);
+	}
+}
+
+.btn.inline {
+	padding-inline: 0;
+	padding-block: 0;
+	min-width: unset;
+}

@@ -1,0 +1,36 @@
+.splitSection {
+	padding-block: var(--spacing-lg-y);
+	padding-inline: var(--content-margin);
+	> .wrapper {
+		max-width: var(--max-content-width);
+		margin-inline: auto;
+		display: grid;
+		grid-template-columns: 0.75fr 1fr;
+		column-gap: 4rem;
+	}
+
+	.contentWrapper {
+		background-color: var(--color-surface-primary-light);
+		padding-block: 3rem;
+		padding-inline: 3rem;
+
+		h1 {
+			margin-block-end: 1.5rem;
+		}
+
+		p,
+		ul,
+		ol {
+			&:not(:last-child) {
+				margin-block-end: 0.75em;
+			}
+		}
+	}
+
+	.imageWrapper {
+		min-height: 600px;
+		position: relative;
+		figure {
+		}
+	}
+}

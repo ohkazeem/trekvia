@@ -1,0 +1,240 @@
+@use "./mixins.scss" as *;
+
+.header {
+	position: relative;
+}
+
+.logoArea {
+	padding-inline: var(--content-margin);
+	padding-block: 1rem;
+	> .wrapper {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		row-gap: 0.5rem;
+		max-width: var(--max-content-width);
+		margin-inline: auto;
+	}
+
+	img {
+		max-width: 100%;
+	}
+
+	.tagline {
+		font-size: var(--font-size-small);
+		font-family: var(--font-heading);
+	}
+}
+
+.navigationArea {
+	background-color: var(--color-surface-primary);
+	color: var(--color-text-on-primary);
+	padding-inline: var(--content-margin);
+	> .wrapper {
+		// display: flex;
+		display: grid;
+		grid-template-columns: 260px 1fr 260px;
+		max-width: var(--max-content-width);
+		margin-inline: auto;
+	}
+}
+
+.searchForm {
+	margin-inline-end: 1rem;
+	align-self: center;
+	border-bottom: 1px solid var(--color-surface-light);
+	padding-block-end: 0.25rem;
+	position: relative;
+
+	input {
+		padding-inline-start: 22px;
+		background-color: transparent;
+		border: none;
+		color: var(--color-text-on-dark);
+		outline-color: transparent;
+		font-size: var(--font-size-xsmall);
+		&:focus,
+		&:focus-visible {
+			outline: none;
+		}
+		&::placeholder {
+			color: var(--color-text-on-dark);
+			opacity: 0.8;
+		}
+	}
+
+	button {
+		position: absolute;
+		background-color: transparent;
+		border: none;
+		cursor: pointer;
+		top: 4px;
+	}
+}
+
+.nav {
+	margin-inline: auto;
+
+	ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: flex;
+		column-gap: 0.25rem;
+
+		li {
+			display: flex;
+		}
+
+		li a {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			padding-block: 1.25rem;
+			padding-inline: 1.25rem;
+			font-size: var(--font-size-xsmall);
+			text-transform: uppercase;
+			line-height: 1;
+			@include hover {
+				background-color: color-mix(in srgb, var(--color-surface-primary) 100%, #000 10%);
+			}
+			span {
+				line-height: inherit;
+			}
+		}
+
+		:global(.active) {
+			background-color: color-mix(in srgb, var(--color-surface-primary) 100%, #000 10%);
+		}
+	}
+}
+
+.mobileToggler {
+	display: none;
+	display: none;
+	position: relative;
+	z-index: 100;
+	margin-left: auto;
+	background-color: transparent;
+	width: 40px;
+	height: 40px;
+	border: none;
+	border-radius: 0;
+	padding: 0.5rem;
+	flex-shrink: 0;
+	cursor: pointer;
+	.btnLine {
+		display: block;
+		width: 100%;
+		height: 1.5px;
+		border-radius: 20px;
+		background-color: var(--color-primary);
+		position: relative;
+		transition:
+			transform 0.2s ease-in-out,
+			width 0.2s ease;
+		visibility: visible;
+
+		&:before,
+		&:after {
+			content: "";
+			position: absolute;
+			width: 100%;
+			height: inherit;
+			border-radius: inherit;
+			background-color: inherit;
+			top: -8px;
+			left: 50%;
+			transform: translateX(-50%);
+			transition:
+				transform 0.2s ease-in-out,
+				width 0.2s ease;
+		}
+
+		&:after {
+			top: 8px;
+		}
+	}
+
+	&[aria-expanded="true"] {
+		.btnLine {
+			transform: rotate(40deg);
+
+			&:before {
+				top: 0;
+				transform: translateX(-50%) rotate(-82deg);
+			}
+
+			&:after {
+				width: 0;
+			}
+		}
+	}
+}
+
+.closedNav.navigationArea {
+	grid-template-rows: 0fr;
+}
+
+@include responsive-down(md) {
+	.logoArea {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+
+		> .wrapper {
+			margin-inline-start: 0;
+		}
+	}
+	.navigationArea {
+		padding-inline: 0;
+		display: grid;
+		grid-template-rows: 1fr;
+		transition: grid-template-rows 0.5s ease-in-out;
+		z-index: 10;
+		position: absolute;
+		top: 100%;
+		width: 100%;
+		left: 0;
+		> .wrapper {
+			display: flex;
+			flex-direction: column;
+			width: 100%;
+			overflow: hidden;
+
+			.nav {
+				order: -1;
+				width: 100%;
+				ul {
+					flex-direction: column;
+					li {
+						a {
+							display: flex;
+							width: 100%;
+						}
+					}
+				}
+			}
+		}
+	}
+	.mobileToggler {
+		display: block;
+	}
+
+	.searchForm {
+		width: 100%;
+		max-width: calc(100% - var(--content-margin) * 2);
+		margin-block-end: 1rem;
+		height: 45px;
+		input {
+			height: 100%;
+			width: 100%;
+		}
+
+		button {
+			top: 50%;
+			transform: translateY(-50%);
+		}
+	}
+}

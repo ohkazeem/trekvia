@@ -1,0 +1,89 @@
+*,
+*::after,
+*::before {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	outline-color: transparent !important;
+}
+
+html {
+	scroll-behavior: smooth;
+	box-sizing: border-box;
+}
+
+body {
+	color: var(--color-text-on-light);
+	font-family: var(--font-body);
+	font-size: var(--font-size-small);
+	line-height: 1.28;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+	transition: all 0.3s ease-in-out;
+}
+
+h1,
+h2,
+h3,
+h4 {
+	font-family: var(--font-heading);
+	line-height: 1.1;
+}
+
+.text-center {
+	text-align: center;
+}
+
+.text-right {
+	text-align: right;
+}
+
+.mt-3xs {
+	margin-block-start: 0.5rem;
+}
+
+.mt-2xs {
+	margin-block-start: 1rem;
+}
+
+.mt-xs {
+	margin-block-start: 1.5rem;
+}
+
+.py-lg {
+	padding-block: var(--spacing-lg-y);
+}
+
+.pt-lg {
+	padding-block-start: var(--spacing-lg-y);
+}
+
+.pb-lg {
+	padding-block-end: var(--spacing-lg-y);
+}
+
+.size-2xs {
+	font-size: var(--font-size-2xsmall);
+}
+
+.size-xs {
+	font-size: var(--font-size-xsmall);
+}
+
+.size-s {
+	font-size: var(--font-size-small);
+}
+
+.size-m {
+	font-size: var(--font-size-medium);
+}
+
+select,
+::picker(select) {
+	appearance: base-select;
+}

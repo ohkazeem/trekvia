@@ -1,0 +1,15 @@
+@use "./mixins.scss" as *;
+
+.gridLayout {
+	padding-block: var(--spacing-lg-y);
+	padding-inline: var(--content-margin);
+	> .wrapper {
+		display: grid;
+		grid-template-columns: 1fr 0.3fr;
+		max-width: var(--max-content-width);
+		margin-inline: auto;
+	}
+	.main {
+		padding-inline-end: 4rem;
+	}
+}

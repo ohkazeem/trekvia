@@ -1,0 +1,22 @@
+@use "./mixins.scss" as *;
+
+.sidebar {
+	background-color: var(--color-surface-primary-light);
+	padding-block: 2.5rem;
+	padding-inline: 1.5rem;
+}
+
+.form {
+	flex-direction: column;
+	height: unset;
+	input {
+		width: 100%;
+		border: 1px solid var(--color-secondary);
+		background-color: var(--color-surface-light);
+		mix-blend-mode: unset;
+	}
+
+	button {
+		width: 100%;
+	}
+}

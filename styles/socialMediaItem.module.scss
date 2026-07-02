@@ -1,0 +1,23 @@
+@use "./mixins.scss" as *;
+
+.socialItem {
+	position: relative;
+	overflow: hidden;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 50px;
+	height: 50px;
+	background-color: var(--color-secondary);
+	color: var(--color-text-on-dark);
+
+	@include hover {
+		background-color: var(--color-surface-dark);
+		color: var(--color-primary);
+	}
+	span {
+		position: absolute;
+		z-index: -1;
+		opacity: 0;
+	}
+}

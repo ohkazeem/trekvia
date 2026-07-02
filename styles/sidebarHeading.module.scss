@@ -1,0 +1,16 @@
+.heading {
+	background-color: var(--color-surface-primary);
+	color: var(--color-text-on-primary);
+	text-align: center;
+	padding-block: 1rem;
+	padding-inline: 1rem;
+	margin-block-end: 1.5rem;
+	&:not(:first-child) {
+		margin-block-start: 2rem;
+	}
+
+	* {
+		font-weight: var(--font-weight-regular);
+		font-size: calc(var(--font-size-medium) + 5px);
+	}
+}

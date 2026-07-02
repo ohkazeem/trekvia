@@ -1,0 +1,146 @@
+@mixin hover {
+	&:hover,
+	&:focus,
+	&:focus-visible,
+	&:focus-within,
+	&:active {
+		&:not(:disabled) {
+			@content;
+		}
+	}
+}
+
+@mixin defaultSpacing {
+	padding-block: var(--spacing-lg-y);
+	padding-inline: var(--content-margin);
+	> div {
+		max-width: var(--max-content-width);
+		margin-inline: auto;
+	}
+}
+
+@mixin metadata {
+	font-size: var(--font-size-2xsmall);
+	text-transform: uppercase;
+}
+
+@mixin metadata-v2 {
+	font-size: var(--font-size-2xsmall);
+	font-family: var(--font-heading);
+	font-weight: var(--font-weight-semibold);
+}
+
+@mixin h3-large {
+	font-size: var(--font-size-2xsmall);
+}
+
+@mixin btn {
+	display: inline-block;
+	min-width: 132px;
+	text-align: center;
+	padding-inline: 20px;
+	padding-block: 12px;
+	line-height: 1.1;
+	font-size: var(--font-size-xsmall);
+	font-weight: var(--font-weight-semibold);
+}
+
+@mixin btn-primary {
+	@include btn;
+	background-color: var(--color-accent-2);
+}
+
+@mixin responsive-down($breakpoint) {
+	@if $breakpoint == xs {
+		@media (max-width: 31.25em) {
+			@content;
+		} //500px - xs mobile
+	}
+
+	@if $breakpoint == sm {
+		@media (max-width: 47.9375em) {
+			@content;
+		} //767px - mobile
+	}
+
+	@if $breakpoint == md {
+		@media (max-width: 61.25em) {
+			@content;
+		} //980px
+	}
+
+	@if $breakpoint == lg {
+		@media (max-width: 64em) {
+			@content;
+		} //1024px - tablet
+	}
+
+	@if $breakpoint == xl {
+		@media (max-width: 90em) {
+			@content;
+		} //1440px
+	}
+}
+
+@mixin responsive-up($breakpoint) {
+	@if $breakpoint == xs {
+		@media (min-width: 30em) {
+			@content;
+		} //479px + 1
+	}
+
+	@if $breakpoint == sm {
+		@media (min-width: 48em) {
+			@content;
+		} //767px + 1
+	}
+
+	@if $breakpoint == md {
+		@media (min-width: 61.3125em) {
+			@content;
+		} //980px + 1
+	}
+
+	@if $breakpoint == lg {
+		@media (min-width: 64.0625em) {
+			@content;
+		} //1024px + 1
+	}
+
+	@if $breakpoint == xl {
+		@media (min-width: 90.0625em) {
+			@content;
+		} //1440px
+	}
+	@if $breakpoint == xxl {
+		@media (min-width: 94.375em) {
+			@content;
+		} //1510px
+	}
+}
+
+@mixin responsive-only($breakpoint) {
+	@if $breakpoint == md {
+		@media (min-width: 48em) and (max-width: 61.25em) {
+			@content;
+		} //  768px - 980px
+	}
+}
+
+@mixin responsive-custom($min: null, $max: null) {
+	@if ($min) and ($max == null) {
+		@media screen and (min-width: $min) {
+			@content;
+		}
+	}
+	@if ($min == null) and ($max) {
+		@media screen and (max-width: $max) {
+			@content;
+		}
+	}
+	@if ($min) and ($max) {
+		@media screen and (min-width: $min) and (max-width: $max) {
+			@content;
+		}
+	}
+}

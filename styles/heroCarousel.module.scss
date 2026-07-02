@@ -1,0 +1,144 @@
+@use "./mixins.scss" as *;
+
+.hero {
+	padding-block: var(--spacing-lg-y);
+	padding-inline: var(--content-margin);
+
+	> .wrapper {
+		max-width: var(--max-content-width);
+		margin-inline: auto;
+		display: grid;
+		grid-template-columns: 1fr 0.5fr;
+		width: 100%;
+		min-height: 700px;
+		aspect-ratio: 1.9/1;
+		@include responsive-custom(null, 1200px) {
+			grid-template-columns: 1fr 0.65fr;
+		}
+		@include responsive-down(lg) {
+			grid-template-columns: 1fr;
+			aspect-ratio: unset;
+			min-height: unset;
+		}
+	}
+}
+
+.imagesWrapper {
+	margin-inline-end: 4rem;
+	position: relative;
+	@include responsive-down(lg) {
+		aspect-ratio: 2/1;
+		margin-inline-end: 0;
+		margin-block-end: 1rem;
+	}
+
+	> .wrapper {
+		height: 100%;
+
+		img {
+			height: 100%;
+			width: 100%;
+			object-fit: cover;
+			position: absolute;
+			opacity: 0;
+			transition: opacity 0.5s ease-in-out;
+			z-index: -1;
+			&:global(.active) {
+				opacity: 1;
+				z-index: 1;
+			}
+		}
+	}
+}
+
+.cardsWrapper {
+	background-color: var(--color-surface-primary-light);
+	padding-inline: 3rem;
+	padding-block: 4rem;
+	display: flex;
+	flex-direction: column;
+	@include responsive-custom(null, 1200px) {
+		padding-inline: 1.75rem;
+	}
+	@include responsive-down(lg) {
+		min-height: 600px;
+	}
+	@include responsive-custom(null, 600px) {
+		min-height: 700px;
+	}
+	.cards {
+		margin-block-end: 2.5rem;
+		position: relative;
+		flex: 1;
+		// overflow: hidden;
+	}
+}
+
+.cardItem {
+	display: flex;
+	flex-direction: column;
+	position: absolute;
+	opacity: 0;
+	transition: opacity 0.5s ease-in-out;
+	z-index: -1;
+	&:global(.active) {
+		opacity: 1;
+		z-index: 1;
+	}
+	h2 {
+		text-align: center;
+		font-size: var(--font-size-xlarge);
+		margin-block-end: 1rem;
+		overflow: hidden;
+		display: -webkit-box;
+		-webkit-box-orient: vertical;
+		-webkit-line-clamp: 2;
+	}
+	h3 {
+		text-align: center;
+		font-size: calc(var(--font-size-medium) + 4px);
+		font-weight: var(--font-weight-regular);
+		margin-block-end: 2rem;
+		overflow: hidden;
+		display: -webkit-box;
+		-webkit-box-orient: vertical;
+		-webkit-line-clamp: 3;
+	}
+
+	> div {
+		margin-block-end: 2.5rem;
+		text-align: center;
+		overflow: hidden;
+		display: -webkit-box;
+		-webkit-box-orient: vertical;
+		-webkit-line-clamp: 7;
+		* {
+			font-size: calc(var(--font-size-xsmall) + 1px);
+		}
+	}
+
+	:global(.btn) {
+		margin-block-start: auto;
+		align-self: center;
+	}
+}
+
+.dots {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	column-gap: 8px;
+	margin-block-start: auto;
+	flex-shrink: 0;
+	span {
+		display: inline-block;
+		width: 20px;
+		height: 20px;
+		border-radius: 50%;
+		background-color: var(--color-surface-dark);
+		cursor: pointer;
+		&:global(.active) {
+			background-color: var(--color-accent);
+		}
+	}
+}

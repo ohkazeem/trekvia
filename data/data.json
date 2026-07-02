@@ -1,0 +1,85 @@
+{
+	"slides": [
+		{
+			"id": 1,
+			"heading": "Welcome to Trekvia",
+			"subtitle": "Get motivated to be active and fulfill your life goals",
+			"content": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit.",
+			"link": "some-link",
+			"imgUrl": "http://192.168.1.131:3000/home-hero-1.jpg"
+		},
+		{
+			"id": 2,
+			"heading": "Life in Lagos",
+			"subtitle": "Get the inside scoop and latest on what Lagos is like",
+			"content": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit.",
+			"link": "some-link-2",
+			"imgUrl": "http://192.168.1.131:3000/home-hero-2.jpg"
+		},
+		{
+			"id": 3,
+			"heading": "Interested in Business?",
+			"subtitle": "Find out more on how to run a business in Lagos wherever you are",
+			"content": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit.",
+			"link": "some-link-3",
+			"imgUrl": "http://192.168.1.131:3000/home-hero-3.jpg"
+		}
+	],
+	"posts": [
+		{
+			"_id": "6a3fd5111def6f06933f36cb",
+			"index": 0,
+			"guid": "5c09d555-fe1c-4129-b745-b109ee3dcc89",
+			"id": "5c09d555-fe1c-4129-b745-b109ee3dcc89",
+			"title": "mollit et ex deserunt esse duis tempor est do exercitation",
+			"categories": ["qui", "qui", "adipisicing"],
+			"summary": "Dolor proident adipisicing pariatur adipisicing eiusmod non mollit aliquip Lorem ut. Id proident eiusmod ex et magna incididunt aliquip Lorem. Consectetur reprehenderit amet irure eiusmod pariatur amet ad.",
+			"published_date": "Sat Jan 01 2022 00:00:00 GMT-0500 (Eastern Standard Time)",
+			"imgUrl": "http://192.168.1.131:3000/home-hero-1.jpg"
+		},
+		{
+			"_id": "6a3fd5113d677495bf9cbaea",
+			"index": 1,
+			"guid": "d5be3104-4400-4643-9f03-cb5739e359da",
+			"id": "d5be3104-4400-4643-9f03-cb5739e359da",
+			"title": "adipisicing incididunt reprehenderit dolor quis enim ex deserunt nisi tempor",
+			"categories": ["sunt", "laboris", "ea"],
+			"summary": "Ea commodo anim sint consequat deserunt laboris eu laboris enim elit incididunt esse. Laboris et ut sunt cupidatat cupidatat pariatur minim consequat culpa. Elit velit irure est aliqua sunt consequat eu amet ad elit mollit amet veniam sit.",
+			"published_date": "Dec 21 2021 00:00:00 GMT-0500 (Eastern Standard Time)",
+			"imgUrl": "http://192.168.1.131:3000/home-hero-2.jpg"
+		},
+		{
+			"_id": "6a3fd5110e3d7ee6e0998f08",
+			"index": 2,
+			"guid": "828e1838-87aa-4e14-9231-3fef52f4ab8e",
+			"id": "828e1838-87aa-4e14-9231-3fef52f4ab8e",
+			"title": "esse quis cupidatat nulla ad occaecat cillum reprehenderit mollit ad",
+			"categories": ["commodo", "magna", "cillum"],
+			"summary": "Deserunt velit dolor incididunt anim fugiat non ea duis amet. Incididunt ipsum excepteur consectetur nostrud do eiusmod quis velit pariatur deserunt minim. Cupidatat pariatur consectetur pariatur aliquip cillum ad minim exercitation reprehenderit minim.",
+			"published_date": "Oct 15 2025 00:00:00 GMT-0500 (Eastern Standard Time)",
+			"imgUrl": "http://192.168.1.131:3000/home-hero-3.jpg"
+		},
+		{
+			"_id": "6a3fd511e0ff21bf63b046ce",
+			"index": 3,
+			"guid": "b3405072-6644-4196-b361-49006e102f1a",
+			"id": "b3405072-6644-4196-b361-49006e102f1a",
+			"title": "sint aliquip excepteur ex sint incididunt esse fugiat voluptate reprehenderit",
+			"categories": ["consequat", "ipsum", "cupidatat"],
+			"summary": "Et ut commodo elit exercitation laboris. Sunt nulla labore sit officia et mollit do consectetur nostrud consequat sint voluptate ut. Adipisicing consectetur excepteur irure amet consequat.",
+			"published_date": "Apr 12 2024 00:00:00 GMT-0500 (Eastern Standard Time)",
+			"imgUrl": "http://192.168.1.131:3000/home-hero-4.jpg"
+		},
+		{
+			"_id": "6a3fd51114c65f6ef0856c46",
+			"index": 4,
+			"guid": "173c0b2a-3a6e-40d3-acaf-19014c5eb549",
+			"id": "173c0b2a-3a6e-40d3-acaf-19014c5eb549",
+			"title": "proident excepteur exercitation nostrud ad veniam ut consequat anim tempor",
+			"categories": ["commodo", "pariatur", "deserunt"],
+			"summary": "Reprehenderit dolore enim esse dolor labore cillum et pariatur dolore ex pariatur. Ut cupidatat exercitation dolor commodo ipsum magna est reprehenderit est ad anim sint aliquip. Proident consequat excepteur nisi non exercitation.",
+			"published_date": "Jan 11 2026 00:00:00 GMT-0500 (Eastern Standard Time)",
+			"imgUrl": "http://192.168.1.131:3000/home-hero-5.jpg"
+		}
+	]
+}
