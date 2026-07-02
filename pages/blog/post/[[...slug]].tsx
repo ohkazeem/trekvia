@@ -2,10 +2,10 @@ import styles from "@/styles/singlePostPage.module.scss";
 import InputGroup from "@/components/inputGroup";
 import { PostProps } from "@/components/postListItem";
 import { InferGetServerSidePropsType, GetServerSideProps } from "next";
-import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { Controller, SubmitHandler, useForm, FieldPath, FieldValues, ControllerRenderProps } from "react-hook-form";
 import dynamic from "next/dynamic";
 import Button from "@/components/button";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import Image from "next/image";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -37,10 +37,6 @@ const defaultLabels = (type: string, post: PostProps) => {
 			return { heading: "No type chosen" };
 	}
 };
-
-const NoSSRSelect = dynamic(() => import("react-select"), {
-	ssr: false,
-});
 
 const categoriesOptions: CategoryOptionProps[] = [
 	{
@@ -90,14 +86,7 @@ function EditSinglePostPage({ post, type }: InferGetServerSidePropsType<typeof g
 	const onSubmit: SubmitHandler<PostFormProps> = async (data) => {
 		// console.log(data);
 		const formData = new FormData();
-		Object.keys(data).forEach((key) => {
-			// If handling files, data[key][0] targets the File object from a file input
-			if (data[key] instanceof FileList) {
-				formData.append(key, data[key][0]);
-			} else {
-				formData.append(key, data[key]);
-			}
-		});
+
 		// const fileObject = data.featuredImg[0];
 		// formData.append("image", fileObject);
 
@@ -112,7 +101,7 @@ function EditSinglePostPage({ post, type }: InferGetServerSidePropsType<typeof g
 	const [previewUrl, setPreviewUrl] = useState(post ? post.imgUrl : "");
 
 	// Generate a temporary local URL to preview the selected image
-	const handleImageChange = (e) => {
+	const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
 		const file = e.target.files?.[0];
 		if (file) {
 			setPreviewUrl(URL.createObjectURL(file));
@@ -196,25 +185,6 @@ function EditSinglePostPage({ post, type }: InferGetServerSidePropsType<typeof g
 							{errors.summary && <p>{errors?.summary?.message}</p>}
 						</InputGroup>
 
-						<InputGroup>
-							<label htmlFor="categories">Select categories</label>
-							<Controller
-								control={control}
-								name="categories"
-								render={({ field }) => (
-									<NoSSRSelect
-										options={categoriesOptions}
-										isMulti
-										classNamePrefix="select"
-										placeholder="Select categories"
-										onChange={(val) => field?.onChange(val?.value)}
-										value={selectedCategories(field)}
-										// value={categoriesOptions?.find((o) => field.value.includes(o.value))}
-									/>
-								)}
-							/>
-							{errors.categories && <p>{errors?.categories?.message}</p>}
-						</InputGroup>
 						<div className="text-right">
 							<Button type="button">Submit</Button>
 						</div>
