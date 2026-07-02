@@ -75,7 +75,7 @@ function EditSinglePostPage({ post, type }: InferGetServerSidePropsType<typeof g
 			// date: post ? new Date(post.published_date) : null,
 			subtitle: post ? post.subtitle : "",
 			summary: post ? post.summary : "",
-			categories: post ? post.categories : [],
+			// categories: post ? post.categories : [],
 			featuredImg: "",
 		},
 		resolver: zodResolver(postFormSchema),

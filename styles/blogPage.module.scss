@@ -1,0 +1,15 @@
+@use "./mixins.scss" as *;
+.article {
+	@include defaultSpacing;
+}
+
+.gridWrapper {
+	@include defaultSpacing;
+	padding-block-start: 0;
+	.postsList {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(min(400px, 100%), 1fr));
+		column-gap: 2rem;
+		row-gap: 2.5rem;
+	}
+}

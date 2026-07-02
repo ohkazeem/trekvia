@@ -19,7 +19,7 @@ function HomePage({ slides, posts }: InferGetStaticPropsType<typeof getStaticPro
 								posts.map((post) => (
 									<PostListItem
 										post={post}
-										key={post._id}
+										key={post.id}
 									/>
 								))}
 						</div>
@@ -63,20 +63,36 @@ type Props = {
 /**
  * Promises with Satisfies
  */
-export const getStaticProps = (async () => {
+export const getStaticProps: GetStaticProps<Props> = async () => {
 	const FAKE_DATA_URL = process.env.NEXT_PUBLIC_FAKE_DATA_URL;
+	let slides,
+		posts = [];
 	try {
-		const [resForSlides, resForPosts] = await Promise.all([fetch(`${FAKE_DATA_URL}/slides`), fetch(`${FAKE_DATA_URL}/posts`)]);
+		const [resFrontPageData, resForPosts] = await Promise.all([fetch(`${FAKE_DATA_URL}/tr/v1/frontpage`), fetch(`${FAKE_DATA_URL}/tr/v1/posts`)]);
 
-		const [slides, postsData]: [slides: Slide[], postsData: PostProps[]] = await Promise.all([resForSlides.json(), resForPosts.json()]);
-		const posts = postsData?.slice(0, 3) || [];
+		if (resFrontPageData.ok) {
+			const {
+				acf: { hero_carousel },
+			} = await resFrontPageData.json();
 
-		return { props: { slides: slides || [], posts: posts || [] } };
+			if (hero_carousel?.length > 0) {
+				slides = hero_carousel;
+			}
+		}
+
+		if (resForPosts.ok) {
+			const postsData = await resForPosts.json();
+			posts = await postsData.posts;
+		}
+		// const [slides, postsData]: [slides: Slide[], postsData: PostProps[]] = await Promise.all([resForSlides.json(), resForPosts.json()]);
+		posts = posts?.slice(0, 3) || [];
+
+		return { props: { slides: slides, posts: posts } };
 	} catch (err) {
 		console.log(err);
 		return { props: { slides: [], posts: [] } };
 	}
-}) satisfies GetStaticProps<Props>;
+};
 
 /**
  * Single line fetches

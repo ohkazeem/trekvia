@@ -6,6 +6,7 @@ import Button from "@/components/button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import Image from "next/image";
+import DOMPurify from "isomorphic-dompurify";
 
 function SinglePostPage({ post }: InferGetServerSidePropsType<typeof getServerSideProps>) {
 	if (!post) return;
@@ -15,25 +16,30 @@ function SinglePostPage({ post }: InferGetServerSidePropsType<typeof getServerSi
 			<section className={styles.intro}>
 				<div className={styles.wrapper}>
 					<div className={styles.contentWrapper}>
-						<ul>{post.categories && post.categories.map((cat, idx) => <li key={idx}>{cat}</li>)}</ul>
+						<ul>{post.categories && post.categories.map((cat) => <li key={cat.slug}>{cat.term}</li>)}</ul>
 						<h1>{titleCase(post.title)}</h1>
 						<p>{prettyDate(post.published_date)}</p>
 					</div>
-					<Button link={`/blog/post/${post.id}`}>
+					{/* <Button link={`/blog/post/${post.slug}`}>
 						<FontAwesomeIcon icon={faEdit} /> Edit
-					</Button>
-
-					<div className={styles.imageWrapper}>
-						<Image
-							alt={post.title}
-							src={post.imgUrl.replace("http://192.168.1.131:3000", "")}
-							fill
-							priority
-							sizes="(max-width: 768px) 100vw, (max-width: 992px) 75vw,(max-width: 1025px) 50vw , 1920px"
-						/>
-					</div>
+					</Button> */}
+				</div>
+				<div className={styles.imageWrapper}>
+					<Image
+						alt={post.title}
+						src={post.imgUrl || "/home-hero-3.jpg"}
+						fill
+						priority
+						sizes="(max-width: 768px) 100vw, (max-width: 992px) 75vw,(max-width: 1025px) 50vw , 1920px"
+					/>
 				</div>
 			</section>
+
+			<div className={`${styles.contentWrapper} `}>
+				<div className={styles.wrapper}>
+					<div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post?.content) }}></div>
+				</div>
+			</div>
 		</article>
 	);
 }
@@ -48,7 +54,7 @@ export const getServerSideProps: GetServerSideProps<{ post: PostProps }, ParamsP
 	const slug = params?.slug;
 
 	// Fetch the post data based on the slug
-	const res = await fetch(`${process.env.NEXT_PUBLIC_FAKE_DATA_URL}/posts/${slug}`);
+	const res = await fetch(`${process.env.NEXT_PUBLIC_FAKE_DATA_URL}/tr/v1/posts/${slug}`);
 
 	if (!res.ok) {
 		return {

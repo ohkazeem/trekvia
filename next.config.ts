@@ -16,9 +16,9 @@ const nextConfig: NextConfig = {
 			new URL("http://192.168.1.131:3000/**"),
 			{
 				protocol: "https",
-				hostname: "s3.amazonaws.com",
+				hostname: "portfolioapi.olapejukazeem.com",
 				port: "",
-				pathname: "/my-bucket/**",
+				pathname: "/wp-content/uploads/**",
 				search: "",
 			},
 		],

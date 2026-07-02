@@ -2,14 +2,15 @@ import Image from "next/image";
 import Button from "@/components/button";
 import { useCallback, useEffect, useState } from "react";
 import styles from "@/styles/heroCarousel.module.scss";
+import DOMPurify from "isomorphic-dompurify";
 
 export type Slide = {
 	id: number;
 	heading: string;
 	subtitle: string;
-	content: React.ReactNode;
+	content: Node;
 	link: string;
-	imgUrl: string;
+	image: string;
 };
 
 export type HeroCarouselProps = {
@@ -48,8 +49,8 @@ function HeroCarousel({ slides = [] }: HeroCarouselProps) {
 					<div className={styles.wrapper}>
 						{slides.map((slide, i) => (
 							<Image
-								key={slide.id}
-								src={slide.imgUrl.replace("http://192.168.1.131:3000", "")}
+								key={i + 1}
+								src={slide.image}
 								alt=""
 								width={950}
 								height={673}
@@ -65,17 +66,15 @@ function HeroCarousel({ slides = [] }: HeroCarouselProps) {
 							{slides.map((slide, i) => (
 								<div
 									className={`${styles.cardItem} ${currentSlide === i ? "active" : ""}`}
-									key={slide.id}>
+									key={i + 1}>
 									<h2>{slide.heading}</h2>
 									<h3>{slide.subtitle}</h3>
-									<div>
-										<p>{slide.content}</p>
-									</div>
-									<Button
+									<div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(slide?.content) }}></div>
+									{/* <Button
 										link={"/" + slide.link}
 										showIcon={true}>
 										Read more
-									</Button>
+									</Button> */}
 								</div>
 							))}
 						</div>

@@ -31,14 +31,15 @@ function Sidebar() {
 		const controller = new AbortController();
 		async function getRecentPosts() {
 			try {
-				const res = await fetch(`${process.env.NEXT_PUBLIC_FAKE_DATA_URL}/posts`, { signal: controller.signal });
+				const res = await fetch(`${process.env.NEXT_PUBLIC_FAKE_DATA_URL}/tr/v1/posts`, { signal: controller.signal });
 
 				if (!res.ok) {
 					setErrorMessage("Unable to fetch posts currently.");
 					return;
 				}
 				const data = await res.json();
-				const sortedPosts = data.sort((a: PostProps, b: PostProps) => new Date(b.published_date).getTime() - new Date(a.published_date).getTime()).slice(0, 3);
+
+				const sortedPosts = data.posts.sort((a: PostProps, b: PostProps) => new Date(b.published_date).getTime() - new Date(a.published_date).getTime()).slice(0, 3);
 				setRecentPosts(sortedPosts);
 			} catch (err: unknown) {
 				if (Error.isError(err)) {
@@ -93,7 +94,7 @@ function Sidebar() {
 						{recentPosts.map((post) => (
 							<PostListItem
 								post={post}
-								key={post._id}
+								key={post.id}
 								className={"sidebarPostListItem"}
 							/>
 						))}
