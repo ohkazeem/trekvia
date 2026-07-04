@@ -6,7 +6,7 @@ import Button from "@/components/button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import Image from "next/image";
-import DOMPurify from "isomorphic-dompurify";
+import sanitizeHtml from "sanitize-html";
 
 function SinglePostPage({ post }: InferGetServerSidePropsType<typeof getServerSideProps>) {
 	if (!post) return;
@@ -37,7 +37,12 @@ function SinglePostPage({ post }: InferGetServerSidePropsType<typeof getServerSi
 
 			<div className={`${styles.contentWrapper} `}>
 				<div className={styles.wrapper}>
-					<div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post?.content) }}></div>
+					<div
+						dangerouslySetInnerHTML={{
+							__html: sanitizeHtml(post?.content, {
+								allowedTags: sanitizeHtml.defaults.allowedTags.concat(["img"]),
+							}),
+						}}></div>
 				</div>
 			</div>
 		</article>

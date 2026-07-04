@@ -18,7 +18,7 @@ export type PostProps = {
 	summary: string;
 	published_date: Date;
 	imgUrl: string;
-	content: Node;
+	content: string;
 };
 
 export type PostListProps = {

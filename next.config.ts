@@ -3,6 +3,7 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
 	/* config options here */
 	reactStrictMode: true,
+
 	images: {
 		deviceSizes: [600, 991, 1024, 1440, 2560],
 		remotePatterns: [
