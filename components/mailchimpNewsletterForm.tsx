@@ -58,10 +58,6 @@ function MailchimpNewsletterForm({ formClass }: FormProps) {
 
 		if (res.ok) {
 			setStatus({ status: "success", message: "Thank you for subscribing!" });
-			// setTimeout(() => {
-			// 	setStatus(null);
-			// }, 2000);
-			console.log("is ok");
 		} else {
 			const { title, message } = await res.json();
 			if (title === "Member Exists") {

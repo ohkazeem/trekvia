@@ -60,13 +60,6 @@ function IconSelect<TFieldValues extends FieldValues, TName extends FieldPath<TF
 			value={options?.find((o) => o?.value === field?.value)}
 			className={`custom-select ${className}`}
 			classNamePrefix="custom-select"
-			// unstyled
-			// styles={{
-			// 	control: (baseStyles, state) => ({
-			// 		...baseStyles,
-			// 		borderColor: state.isFocused ? "grey" : "red",
-			// 	}),
-			// }}
 		/>
 	);
 }

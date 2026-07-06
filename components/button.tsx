@@ -11,6 +11,7 @@ type DefaultButtonProps = {
 	variant?: "primary" | "secondary" | "inline";
 	action?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 	disabled?: boolean;
+	className?: string;
 };
 
 type RegularType = DefaultButtonProps & {
@@ -25,12 +26,12 @@ type LinkType = DefaultButtonProps & {
 
 type ButtonProps = RegularType | LinkType;
 
-function Button({ type, link, children, disabled, variant = "primary", icon = faArrowRightLong, showIcon = false, action }: ButtonProps) {
+function Button({ type, link, children, disabled, variant = "primary", icon = faArrowRightLong, showIcon = false, action, className }: ButtonProps) {
 	if (type === "button") {
 		return (
 			<button
 				disabled={disabled}
-				className={`${styles.btn} ${styles[variant]}`}
+				className={`${styles.btn} ${styles[variant]} ${className}`}
 				onClick={action}>
 				{children}
 			</button>

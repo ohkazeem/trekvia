@@ -16,19 +16,7 @@ export const isRequired = (schema: z.ZodObject | undefined, fieldName: string | 
 	}
 
 	return undefined;
-	// return !schema.shape[fieldName].safeParse(undefined).success;
 };
-
-// function InputGroup({ children, schema, fieldName }: { children: React.ReactNode; schema?: z.ZodObject; fieldName?: string }) {
-// 	const requiredProps = schema?.shape ? isRequired(schema, fieldName) : undefined;
-// 	return (
-// 		<div
-// 			className={styles.inputGroup}
-// 			{...requiredProps}>
-// 			{children}
-// 		</div>
-// 	);
-// }
 
 function InputGroup<T extends z.ZodObject>({ children, schema, fieldName }: FormFieldsProps<T>) {
 	const requiredProps = schema?.shape ? isRequired(schema, fieldName) : undefined;

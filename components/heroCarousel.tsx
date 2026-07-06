@@ -1,14 +1,14 @@
 import Image from "next/image";
 import Button from "@/components/button";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "@/styles/heroCarousel.module.scss";
-import DOMPurify from "isomorphic-dompurify";
+import sanitizeHtml from "sanitize-html";
 
 export type Slide = {
 	id: number;
 	heading: string;
 	subtitle: string;
-	content: Node;
+	content: string;
 	link: string;
 	image: string;
 };
@@ -28,18 +28,13 @@ function HeroCarousel({ slides = [] }: HeroCarouselProps) {
 	// Interval for autoplay
 	const slideTimer = 3000;
 
-	const getSlide = useCallback(() => {
-		setCurrentSlide((prevIndex: number) => (prevIndex === numOfSlides - 1 ? 0 : prevIndex + 1));
-	}, [numOfSlides]);
-
-	// Setup autoplay for the slider
 	useEffect(() => {
 		if (numOfSlides) {
-			const sliderInterval = setInterval(getSlide, slideTimer);
+			const sliderInterval = setInterval(() => setCurrentSlide((prevIndex: number) => (prevIndex === numOfSlides - 1 ? 0 : prevIndex + 1)), slideTimer);
 			// unmount
 			return () => clearInterval(sliderInterval);
 		}
-	}, [currentSlide, numOfSlides, getSlide]);
+	}, [numOfSlides]);
 
 	if (slides.length < 0) return;
 	return (
@@ -69,12 +64,12 @@ function HeroCarousel({ slides = [] }: HeroCarouselProps) {
 									key={i + 1}>
 									<h2>{slide.heading}</h2>
 									<h3>{slide.subtitle}</h3>
-									<div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(slide?.content) }}></div>
-									{/* <Button
-										link={"/" + slide.link}
+									<div dangerouslySetInnerHTML={{ __html: sanitizeHtml(slide?.content) }}></div>
+									<Button
+										link={slide.link}
 										showIcon={true}>
 										Read more
-									</Button> */}
+									</Button>
 								</div>
 							))}
 						</div>
