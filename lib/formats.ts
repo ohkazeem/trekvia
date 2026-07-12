@@ -17,7 +17,7 @@ export function titleCase(title: string) {
 		.join(" ");
 }
 
-export function prettyDate(date: Date) {
+export function prettyDate(date: string) {
 	if (!date) return;
 	const options: Intl.DateTimeFormatOptions = {
 		year: "numeric",
@@ -43,4 +43,17 @@ export function prettySlug(text: string) {
 	});
 
 	return slug;
+}
+
+export function sanitizeFilename(filename: string) {
+	const extension = filename.split(".").pop();
+
+	const base = filename
+		.replace(/\.[^/.]+$/, "")
+		.toLowerCase()
+		.replace(/[^a-z0-9]+/g, "-")
+		.replace(/-+/g, "-")
+		.slice(0, 60);
+
+	return `${base}-${Date.now()}.${extension}`;
 }

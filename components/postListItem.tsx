@@ -16,7 +16,7 @@ export type PostProps = {
 		slug: string;
 	}[];
 	summary: string;
-	published_date: Date;
+	published_date: string;
 	imgUrl: string;
 	content: string;
 };

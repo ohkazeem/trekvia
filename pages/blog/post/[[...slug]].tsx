@@ -20,7 +20,7 @@ const SelectedOptionSchema = z.object({
 const postFormSchema = z.object({
 	id: z.number().optional(),
 	title: z.string().min(1, "Please add a post title"),
-	date: z.iso.date("A published date is required"),
+	date: z.iso.date().min(1, "A published date is required"),
 	subtitle: z.string().optional(),
 	summary: z.string().min(1, "Please add a post excerpt"),
 	categories: z.array(SelectedOptionSchema).min(1, "Please select at least one category"),
@@ -80,6 +80,7 @@ function EditSinglePostPage({ post, type, categories }: InferGetServerSidePropsT
 	const router = useRouter();
 	const defaults = defaultLabels(type, post);
 	const categoriesOptions = [...categories, ...categoriesOptions2];
+	const [previewUrl, setPreviewUrl] = useState(post ? post.imgUrl : "");
 
 	const {
 		handleSubmit,
@@ -91,16 +92,14 @@ function EditSinglePostPage({ post, type, categories }: InferGetServerSidePropsT
 		defaultValues: {
 			id: post ? Number(post.id) : undefined,
 			title: post ? post.title : "",
-			date: post ? new Date(post.published_date).toISOString().split("T")[0] : undefined,
+			date: post ? post.published_date : "",
 			subtitle: post ? post.subtitle : "",
 			summary: post ? post.summary : "",
-			categories: post ? post?.categories.map((cat) => ({ label: cat.term, value: cat.slug })) : [],
+			categories: post ? post?.categories?.map((cat) => ({ label: cat.term, value: cat.slug })) : [],
 			featuredImg: post ? post.imgUrl : "",
 		},
 		resolver: zodResolver(postFormSchema),
 	});
-
-	console.log(errors);
 
 	const onSubmit: SubmitHandler<PostFormProps> = async (data) => {
 		const formData = new FormData();
@@ -109,8 +108,10 @@ function EditSinglePostPage({ post, type, categories }: InferGetServerSidePropsT
 			if (key === "featuredImg" && value instanceof FileList && value.length > 0) {
 				// Dynamically catch file arrays and append the binary item
 				const fileObj = value[0];
-				formData.append("file", fileObj);
-				formData.append("fileName", fileObj.name);
+				formData.append("featuredImg", fileObj);
+				// formData.append("fileName", fileObj.name);
+			} else if (key === "categories") {
+				formData.append("categories", JSON.stringify(value));
 			} else {
 				// Append normal text/number strings
 				formData.append(key, value as string | Blob);
@@ -123,9 +124,9 @@ function EditSinglePostPage({ post, type, categories }: InferGetServerSidePropsT
 				body: formData,
 			});
 			if (res.ok) {
-				const data = await res.json();
-				console.log(data);
-				// router.refresh();
+				const resData = await res.json();
+				// console.log(resData);
+				router.refresh();
 				// console.log(data);
 			}
 		} catch (err) {
@@ -137,8 +138,6 @@ function EditSinglePostPage({ post, type, categories }: InferGetServerSidePropsT
 	const selectedCategories = (values: { label: string; value: string }[]) => {
 		return values;
 	};
-
-	const [previewUrl, setPreviewUrl] = useState(post ? post.imgUrl : "");
 
 	// Generate a temporary local URL to preview the selected image
 	const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -288,6 +287,12 @@ export const getServerSideProps: GetServerSideProps<ServerSideProps, ParamsProps
 
 		const post = (await postRes?.json()) || null;
 		const categories = (await categoriesRes?.json()) || [];
+
+		if (post.code) {
+			return {
+				notFound: true,
+			};
+		}
 
 		return {
 			props: {

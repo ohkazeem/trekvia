@@ -20,9 +20,9 @@ function SinglePostPage({ post }: InferGetServerSidePropsType<typeof getServerSi
 						<h1>{titleCase(post.title)}</h1>
 						<p>{prettyDate(post.published_date)}</p>
 					</div>
-					{/* <Button link={`/blog/post/${post.slug}`}>
+					<Button link={`/blog/post/${post.slug}`}>
 						<FontAwesomeIcon icon={faEdit} /> Edit
-					</Button> */}
+					</Button>
 				</div>
 				<div className={styles.imageWrapper}>
 					<Image
